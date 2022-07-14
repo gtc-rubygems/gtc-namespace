@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require "gtc/namespace/base"
 
@@ -6,6 +7,6 @@ class Object
   # returns a new namespace object which can be used to resolve namespace-related modules
   # @return [::GTC::Namespace::Base] namespace
   def namespace
-    ::GTC::Namespace::Base.new(self.is_a?(Module) ? self : self.class)
+    ::GTC::Namespace::Base.new(self)
   end
 end

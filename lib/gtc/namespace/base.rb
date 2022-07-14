@@ -24,7 +24,7 @@ module GTC
       class << self
         # resolves a object by provided names
         #
-        #   ::Namespace.resolve(:user,'cell','index')
+        #   ::GTC::Namespace::Base.resolve(:user,'cell','index')
         #   > ::User::Cell::Index
         #
         # @param [Array<String, Symbol, Array>] args - array of separated namespace strings
@@ -35,7 +35,7 @@ module GTC
 
         # returns the full object name as string.
         #
-        #   ::Namespace.path(:user, 'Models',:open_tags, 'find')
+        #   ::GTC::Namespace::Base.path(:user, 'Models',:open_tags, 'find')
         #   > "User::Model::OpenTag::Find"
         #
         # @param [Array<String, Symbol, Array>] args - array of separated namespace strings
@@ -46,7 +46,7 @@ module GTC
 
         # builds & resolves a new module by provided module names
         #
-        #   ::Namespace.build(:user,'cell','index')
+        #   ::GTC::Namespace::Base.build(:user,'cell','index')
         #   > ::User::Cell::Index
         #
         # @param [Array<String, Symbol, Array>] args - array of separated namespace strings
@@ -68,10 +68,10 @@ module GTC
 
         # converts a provided module to a totally new one
         #
-        #   ::Namespace.transform(User::Cell::Index, [:__resource, :endpoint, :__handle])
+        #   ::GTC::Namespace::Base.transform(User::Cell::Index, [:__resource, :endpoint, :__handle])
         #   > User::Endpoint::Index
         #
-        #   ::Namespace.transform(Admin::UsersController, [:__scope, :home_controller])
+        #   ::GTC::Namespace::Base.transform(Admin::UsersController, [:__scope, :home_controller])
         #   > Admin::HomeController
         #
         # @param [Object] klass
@@ -288,7 +288,7 @@ module GTC
         # @param [Object] klass
         # @param [Integer] pos - section position
         # @return [Symbol, nil] section symbol
-        def section(klass, pos=0)
+        def section(klass, pos = 0)
           self.sections(klass)[pos]
         end
 
@@ -322,25 +322,27 @@ module GTC
         end
       end
 
-      def initialize(klass)
-        raise "Generating a namespace from a Namespace will break the universe!" if klass <= GTC::Namespace::Base
+      def initialize(object)
+        klass = object.is_a?(Module) ? object : object.class
+        raise "Generating a namespace from a Namespace will break the universe!" if klass <= ::GTC::Namespace::Base
+
         @klass = klass
       end
 
       # returns all components as array
-      # See ::Namespace.components
+      # See ::GTC::Namespace::Base.components
       def components
         self.class.components(klass)
       end
 
       # returns all modules as array
-      # See ::Namespace.modules
+      # See ::GTC::Namespace::Base.modules
       def modules
         self.class.modules(klass)
       end
 
       # returns all sections as array
-      # See ::Namespace.sections
+      # See ::GTC::Namespace::Base.sections
       def sections
         self.class.sections(klass)
       end
@@ -348,7 +350,7 @@ module GTC
       # returns the scope of a provided klass.
       # PLEASE NOTE: There is no scope for a class with a single module
       #
-      # See ::Namespace.scope
+      # See ::GTC::Namespace::Base.scope
       def scope
         self.class.scope(klass)
       end
@@ -356,7 +358,7 @@ module GTC
       # returns the concept name of a provided klass.
       # it detects the first camel-case module and returns its concept name (camelcase string, just the last one).
       #
-      # See ::Namespace.concept
+      # See ::GTC::Namespace::Base.concept
       def concept
         self.class.concept(klass)
       end
@@ -366,7 +368,7 @@ module GTC
       # If there is more or less than three modules it detects the first camel-cased module and returns its resource name (all camelcase token, except the last one - then singularize).
       # As last fallback it uses the first module.
       #
-      # See ::Namespace.resource
+      # See ::GTC::Namespace::Base.resource
       def resource
         self.class.resource(klass)
       end
@@ -374,14 +376,14 @@ module GTC
       # returns the service name of a provided klass.
       # It checks for at least three modules and returns the penultimate service.
       #
-      # See ::Namespace.service
+      # See ::GTC::Namespace::Base.service
       def service
         self.class.service(klass)
       end
 
       # returns the section name of a provided klass.
       #
-      # See ::Namespace.section
+      # See ::GTC::Namespace::Base.section
       def section(pos = 0)
         self.class.section(klass, pos)
       end
@@ -389,15 +391,22 @@ module GTC
       # returns the handle name of a provided klass.
       # It checks for at least three modules and returns the last module name.
       #
-      # See ::Namespace.handle
+      # See ::GTC::Namespace::Base.handle
       def handle
         self.class.handle(klass)
+      end
+
+      # converts a provided module to a totally new one
+      #
+      # See ::GTC::Namespace::Base.transform
+      def transform(packs, resolve = true)
+        self.class.transform(klass, packs, resolve)
       end
 
       # prints a info string for each namespace method.
       # just for debugging
       #
-      # See ::Namespace.info
+      # See ::GTC::Namespace::Base.info
       def info
         self.class.info(klass)
       end

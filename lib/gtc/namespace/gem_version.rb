@@ -8,9 +8,9 @@ module GTC
     end
 
     module VERSION
-      MAJOR = 1
-      MINOR = 0
-      TINY  = 0
+      MAJOR = 0
+      MINOR = 1
+      TINY  = 2
       PRE   = nil
 
       STRING = [MAJOR, MINOR, TINY, PRE].compact.join(".")

@@ -38,6 +38,10 @@ RSpec.describe GTC::Namespace::Base do
       ).to be Dummy::Endpoint::Index
 
       expect(
+        GTC::Namespace::Base.transform(Dummy::Cell::Index, [:__resource, :__section, :__handle])
+      ).to be Dummy::Dummy::Index
+
+      expect(
         GTC::Namespace::Base.transform(Dummy::Cell, [:__scope, 'UsersController'])
       ).to be Dummy::UsersController
     end
@@ -252,6 +256,13 @@ RSpec.describe GTC::Namespace::Base do
         @klass.namespace.handle
       ).to eq :index
     end
+
+    it '#transform' do
+      expect(
+        @klass.namespace.transform([:__resource, :__section, :__handle])
+      ).to be Dummy::Dummy::Index
+    end
+
 
     it '#info' do
       expect{

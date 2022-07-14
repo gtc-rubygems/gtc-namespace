@@ -1,6 +1,6 @@
-# Gtc::Namespace
+# GTC::Namespace
 
-Namespace is a Object-extension to provide unified namespace methods, that can be used to simplify the use of modules & sections.
+Namespace is a Object-extension to provide unified namespace methods, that are used to simplify a dynamic access of every module.
 
 -----
 
@@ -31,21 +31,9 @@ Or install it yourself as:
 ## Examples
 
 ```ruby
-require 'namespace'
-
-# the following object does NOT exist
-MyApplication::Commands::ImportUsers rescue nil
-#> nil
-
-# create new module from namespace
-mod = Namespace.build("MyApplication::Commands::ImportUsers")
-
-mod.namespace.components
-# > [MyApplication, MyApplication::Commands, MyApplication::Commands::ImportUser]
-```
-
-```ruby
 require 'gtc-namespace'
+
+# build new namespace instance
 namespace = Admin::UsersController.namespace
 
 namespace.scope
@@ -61,6 +49,7 @@ namespace.concept
 ```ruby
 require 'gtc-namespace'
 
+# print info about the namespace
 My::Membership::Operation::Index.namespace.info
 # > -----------------------------------------------------------------------------------------------
 # > => My::Membership::Operation::Index <=
@@ -73,6 +62,49 @@ My::Membership::Operation::Index.namespace.info
 # > service   : operation
 # > handle    : index
 # > -----------------------------------------------------------------------------------------------
+```
+
+
+```ruby
+# inflect gtc-namespace to 'root' -> ::Namespace
+require 'gtc/inflections/namespace'
+
+# the following object does NOT exist
+MyApplication::Commands::ImportUsers rescue nil
+#> nil
+
+# create new module from namespace
+mod = Namespace.build("MyApplication::Commands::ImportUsers")
+# > MyApplication::Commands::ImportUsers
+
+mod.namespace.components
+# > [MyApplication, MyApplication::Commands, MyApplication::Commands::ImportUser]
+```
+
+-----
+
+## gem requirement & inflections
+
+Initialize the namespace by simply require the gem:
+
+```ruby
+require 'gtc/namespace'
+
+# access any object's namespace through #namespace
+# e.g.
+Kernel.namespace
+
+# access resolve, path, transform & build methods through GTC::Namespace::Base
+# e.g.
+GTC::Namespace::Base.resolve(:a,:b,:c)
+```
+
+Inflect the ```GTC::Namespace::Base``` as a direct accessible constant ```Namespace```:
+```ruby
+require 'gtc/inflections/namespace'
+
+# directly access
+Namespace.resolve(:a,:b,:c)
 ```
 
 -----
@@ -233,6 +265,9 @@ Admin::UsersController.namespace.info
 resolves a object by provided names
 
 ```ruby
+require 'gtc/inflections/namespace'
+
+
 ::Namespace.resolve(:users,'cell','indEx')
 # > ::User::Cell::Index
 ```

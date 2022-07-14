@@ -5,10 +5,13 @@ require_relative "lib/gtc/namespace/version"
 Gem::Specification.new do |spec|
   spec.name                  = "gtc-namespace"
   spec.version               = GTC::Namespace.version
-  spec.authors               = ["Gonzo"]
+  spec.authors               = ["Tobias Gonsior (Gonzo)"]
   spec.email                 = ["rubygems@gonzo-hosting.de"]
   spec.summary               = "Unified namespace for ruby applications"
-  spec.description           = "GTC :: Namespace - Enhance your development experience"
+  spec.description           = <<DESC
+Namespace is a Object-extension to provide unified namespace methods,
+that are used to simplify a dynamic access of every module.
+DESC
   spec.homepage              = "https://gitlab.services.gonzo-hosting.de/rubygems/gtc-namespace"
   spec.license               = "MIT"
   spec.required_ruby_version = ">= 2.3.0"
@@ -28,9 +31,9 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'activesupport', '>= 6.0'
+  spec.add_dependency 'activesupport'
 
-  spec.add_development_dependency 'rspec',  '~> 3.11'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'simplecov',  '~> 0.21'
-  spec.add_development_dependency 'rake', "~> 13.0"
 end

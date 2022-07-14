@@ -73,4 +73,10 @@ module Dummy
 
     end
   end
+
+  module Dummy
+    class Index
+
+    end
+  end
 end
