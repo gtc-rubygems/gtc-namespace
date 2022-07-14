@@ -1,6 +1,11 @@
 # GTC::Namespace
 
-Namespace is a Object-extension to provide unified namespace methods, that are used to simplify a dynamic access of every module.
+[![GTC::Namespace Build Status](https://github.com/gtc-rubygems/gtc-namespace/workflows/Test/badge.svg)](https://github.com/gtc-rubygems/gtc-namespace/actions)
+[![GTC::Namespace Build Status](https://shields.io/github/workflow/status/gtc-rubygems/gtc-namespace/Test)](https://github.com/gtc-rubygems/gtc-namespace/actions)
+[![Gem Version](https://badge.fury.io/rb/gtc-namespace.svg)](https://badge.fury.io/rb/gtc-namespace)
+
+
+GTC::Namespace is a Object-extension to provide unified namespace methods, that are used to simplify a dynamic access of every module.
 
 -----
 
@@ -20,13 +25,9 @@ Or install it yourself as:
 
     $ gem install gtc-namespace
 
------
-
 ## Enhancements
 * Unified namespace methods (like: components, modules, sections) to simplify the use of modules & sections.
 * Additional methods to ```transform```, ```build``` or re-```path``` a object
-
------
 
 ## Examples
 
@@ -64,7 +65,6 @@ My::Membership::Operation::Index.namespace.info
 # > -----------------------------------------------------------------------------------------------
 ```
 
-
 ```ruby
 # inflect gtc-namespace to 'root' -> ::Namespace
 require 'gtc/inflections/namespace'
@@ -80,8 +80,6 @@ mod = Namespace.build("MyApplication::Commands::ImportUsers")
 mod.namespace.components
 # > [MyApplication, MyApplication::Commands, MyApplication::Commands::ImportUser]
 ```
-
------
 
 ## gem requirement & inflections
 
@@ -106,8 +104,6 @@ require 'gtc/inflections/namespace'
 # directly access
 Namespace.resolve(:a,:b,:c)
 ```
-
------
 
 ## Object Usage
 
@@ -257,8 +253,6 @@ Admin::UsersController.namespace.info
 #  -----------------------------------------------------------------------------------------------
 ```
 
------
-
 ## Namespace Usage
 
 ### resolve
@@ -309,8 +303,6 @@ Shorts can be used, to access the namespace methods:
 ::Namespace.transform(Admin::UsersController, [:__scope, :home_controller])
 # > Admin::HomeController
 ```
-
------
 
 ## Docs
 
