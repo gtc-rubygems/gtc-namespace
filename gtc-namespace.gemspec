@@ -17,9 +17,9 @@ DESC
   spec.required_ruby_version = ">= 2.3.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
-  spec.metadata["homepage_uri"]      = "https://gitlab.services.gonzo-hosting.de/rubygems/gtc-namespace"
-  spec.metadata["source_code_uri"]   = "https://gitlab.services.gonzo-hosting.de/rubygems/gtc-namespace"
-  spec.metadata["changelog_uri"]     = "https://gitlab.services.gonzo-hosting.de/rubygems/gtc-namespace/docs/CHANGELOG.md"
+  spec.metadata["homepage_uri"]      = "https://github.com/gtc-rubygems/gtc-namespace"
+  spec.metadata["source_code_uri"]   = "https://github.com/gtc-rubygems/gtc-namespace"
+  spec.metadata["changelog_uri"]     = "https://github.com/gtc-rubygems/gtc-namespace/blob/main/docs/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

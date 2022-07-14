@@ -1,5 +1,8 @@
 # GTC :: Namespace - CHANGELOG
 
+## [0.1.3] - 2022-07-14
+* **[fix]** gemspec links
+
 ## [0.1.2] - 2022-07-14
 * **[ref]** ```Object#namespace``` to provide self as 'klass'
 * **[ref]** GTC::Namespace::Base#initialize to provide any object & auto-detect it's class
